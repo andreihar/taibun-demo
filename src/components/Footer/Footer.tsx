@@ -1,36 +1,31 @@
-import { Anchor, Group, ActionIcon, rem } from '@mantine/core';
+import { Group, ActionIcon, rem, Flex, Box } from '@mantine/core';
 import { IconBrandYoutube, IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react';
-// import { MantineLogo } from '@mantinex/mantine-logo';
-import classes from './Footer.module.css';
+import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
 
 export default function Footer() {
+  const { t, i18n } = useTranslation();
+  const [_, setRerender] = useState(0);
+  useEffect(() => {
+    setRerender(1);
+  }, [i18n.language]);
 
   return (
-    <div className={classes.footer}>
-      <div className={classes.inner}>
-        {/* <MantineLogo size={28} /> */}
-        <a href="">MantineLogo</a>
-
-        <Group className={classes.links}>© 2024 Andrei Harbachov. All rights reserved.</Group>
-
+    <Box p={0} style={{ borderTop: `1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5))`, backgroundColor: `light-dark(white, #333)` }}>
+      <Flex direction={{ base: 'column', sm: 'row' }} justify="space-between" align="center" p="md">
+        <Group mt={{ sm: '0', base: 'sm' }} mb={{ sm: '0', base: 'sm' }}>© 2024 Andrei Harbachov. {t('copyright')}</Group>
         <Group gap="xs" justify="flex-end" wrap="nowrap">
-          <a href="https://www.github.com/andreihar">
-            <ActionIcon size="lg" variant="default" radius="xl">
-              <IconBrandGithub style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
-            </ActionIcon>
-          </a>
-          <a href="https://www.linkedin.com/in/andreihar">
-            <ActionIcon size="lg" variant="default" radius="xl">
-              <IconBrandLinkedin style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
-            </ActionIcon>
-          </a>
-          <a href="https://www.youtube.com/@aharba">
-            <ActionIcon size="lg" variant="default" radius="xl">
-              <IconBrandYoutube style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
-            </ActionIcon>
-          </a>
+          <ActionIcon component="a" href="https://www.github.com/andreihar" target="_blank" size="lg" variant="default" radius="xl" aria-label="Github">
+            <IconBrandGithub style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon component="a" href="https://www.linkedin.com/in/andreihar" target="_blank" size="lg" variant="default" radius="xl" aria-label="LinkedIn">
+            <IconBrandLinkedin style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon component="a" href="https://www.youtube.com/@aharba" target="_blank" size="lg" variant="default" radius="xl" aria-label="YouTube">
+            <IconBrandYoutube style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+          </ActionIcon>
         </Group>
-      </div>
-    </div>
+      </Flex>
+    </Box >
   );
 }
