@@ -1,5 +1,5 @@
 import { Container, Button, Flex, Box, Grid, Textarea, rem } from '@mantine/core';
-import commonClasses from '../../styles/common.module.css';
+import commonClasses from '../styles/common.module.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { toSimplified, toTraditional } from 'taibun';
@@ -13,21 +13,17 @@ export default function Converter() {
   const clipboard = useClipboard();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (mode) {
-      setOutputValue(toTraditional(inputValue));
-    } else {
-      setOutputValue(toSimplified(inputValue));
-    }
-  }, [mode]);
-
-  const handleConvert = () => {
+  const performConversion = () => {
     if (mode) {
       setOutputValue(toTraditional(inputValue));
     } else {
       setOutputValue(toSimplified(inputValue));
     }
   };
+
+  useEffect(() => {
+    performConversion();
+  }, [inputValue, mode]);
 
   return (
     <Box className={commonClasses.wrapper}>
@@ -36,10 +32,6 @@ export default function Converter() {
           <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
             <Textarea size="xl" radius="md" placeholder={t('transliterator.enter')} minRows={10} maxRows={10} autosize
               onChange={event => setInputValue(event.target.value)} />
-            <Flex mt='lg' justify="center">
-              <Button radius="xl" size="md" styles={{ root: { height: rem(48), backgroundImage: 'linear-gradient(to right, var(--mantine-color-blue-filled), var(--mantine-color-cyan-filled))' } }}
-                onClick={handleConvert}>{t('transliterator.convert')}</Button>
-            </Flex>
           </Grid.Col>
           <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
             <Textarea size="xl" radius="md" placeholder={t('converter.output')} minRows={10} maxRows={10} autosize

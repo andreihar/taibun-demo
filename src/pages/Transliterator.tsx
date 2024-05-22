@@ -1,7 +1,7 @@
 import { Container, Text, TextInput, Button, Switch, Flex, Box, Grid, Textarea, Select, Checkbox, rem } from '@mantine/core';
-import commonClasses from '../../styles/common.module.css';
+import commonClasses from '../styles/common.module.css';
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Converter } from 'taibun';
 import { useClipboard } from '@mantine/hooks';
 import { IconCopy, IconCheck } from '@tabler/icons-react';
@@ -22,6 +22,13 @@ export default function Transliterator() {
   const [options, setOptions] = useState({ system, dialect, format, punctuation, convertNonCjk });
   const clipboard = useClipboard();
   const { t } = useTranslation();
+  const cRef = useRef(new Converter(options));
+
+  const performConversion = () => {
+    const chunks = inputValue.split(/([\n\t]+)/);
+    const convertedChunks = chunks.map(chunk => /[\n\t]/.test(chunk) ? chunk : cRef.current.get(chunk));
+    setOutputValue(convertedChunks.join(''));
+  };
 
   useEffect(() => {
     const options: any = { system, dialect, format, punctuation, convertNonCjk };
@@ -35,18 +42,13 @@ export default function Transliterator() {
     }
 
     setOptions(options);
-    const c = new Converter(options);
-    const chunks = inputValue.split(/([\n\t]+)/);
-    const convertedChunks = chunks.map(chunk => /[\n\t]/.test(chunk) ? chunk : c.get(chunk));
-    setOutputValue(convertedChunks.join(''));
+    cRef.current = new Converter(options);
+    performConversion();
   }, [system, dialect, format, delimiter, useCustomDelimiter, sandhi, punctuation, convertNonCjk]);
 
-  const handleConvert = () => {
-    const c = new Converter(options);
-    const chunks = inputValue.split(/([\n\t]+)/);
-    const convertedChunks = chunks.map(chunk => /[\n\t]/.test(chunk) ? chunk : c.get(chunk));
-    setOutputValue(convertedChunks.join(''));
-  };
+  useEffect(() => {
+    performConversion();
+  }, [inputValue]);
 
   return (
     <Box pos='relative' className={commonClasses.wrapper}>
@@ -55,10 +57,6 @@ export default function Transliterator() {
           <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
             <Textarea size="xl" radius="md" placeholder={t('transliterator.enter')} minRows={10} maxRows={10} autosize
               onChange={event => setInputValue(event.target.value)} />
-            <Flex mt='lg' justify="center">
-              <Button radius="xl" size="md" styles={{ root: { height: rem(48), backgroundImage: 'linear-gradient(to right, var(--mantine-color-blue-filled), var(--mantine-color-cyan-filled))' } }}
-                onClick={handleConvert}>{t('transliterator.convert')}</Button>
-            </Flex>
           </Grid.Col>
           <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
             <Textarea size="xl" radius="md" placeholder={t('transliterator.output')} minRows={10} maxRows={10} autosize
@@ -91,19 +89,20 @@ export default function Transliterator() {
                   { value: 'Pingyim', label: t('transliterator.system.pingyim') },
                   { value: 'Tongiong', label: t('transliterator.system.tongiong') },
                   { value: 'IPA', label: t('transliterator.system.ipa') },
-                ]} value={system} onChange={(value) => setSystem(value as any)} />
+                ]} value={system} onChange={(value) => value !== null && setSystem(value as any)} />
               </Grid.Col>
-              <Grid.Col span={{ base: 6, md: 4 }}><Select label={t('transliterator.dialect.label')} data={[
-                { value: 'south', label: t('transliterator.dialect.south') },
-                { value: 'north', label: t('transliterator.dialect.north') },
-              ]} value={dialect} onChange={(value) => setDialect(value as any)} />
+              <Grid.Col span={{ base: 6, md: 4 }}>
+                <Select label={t('transliterator.dialect.label')} data={[
+                  { value: 'south', label: t('transliterator.dialect.south') },
+                  { value: 'north', label: t('transliterator.dialect.north') },
+                ]} value={dialect} onChange={(value) => value !== null && setDialect(value as any)} />
               </Grid.Col>
               <Grid.Col span={{ base: 6, md: 4 }}>
                 <Select label={t('transliterator.format.label')} data={[
                   { value: 'mark', label: t('transliterator.format.mark') },
                   { value: 'number', label: t('transliterator.format.number') },
                   { value: 'strip', label: t('transliterator.format.strip') },
-                ]} value={format} onChange={(value) => setFormat(value as any)} />
+                ]} value={format} onChange={(value) => value !== null && setFormat(value as any)} />
               </Grid.Col>
               <Grid.Col span={{ base: 6, md: 4 }}>
                 <Box mt={4}>
@@ -129,13 +128,13 @@ export default function Transliterator() {
                   { value: 'none', label: t('transliterator.sandhi.none') },
                   { value: 'excLast', label: t('transliterator.sandhi.excLast') },
                   { value: 'inclLast', label: t('transliterator.sandhi.inclLast') },
-                ]} value={sandhi} onChange={(value) => setSandhi(value as any)} />
+                ]} value={sandhi} onChange={(value) => value !== null && setSandhi(value as any)} />
               </Grid.Col>
               <Grid.Col span={{ base: 6, md: 4 }}>
                 <Select label={t('transliterator.punctuation.label')} data={[
                   { value: 'format', label: t('transliterator.punctuation.format') },
                   { value: 'none', label: t('transliterator.punctuation.none') },
-                ]} value={punctuation} onChange={(value) => setPunctuation(value as any)} />
+                ]} value={punctuation} onChange={(value) => value !== null && setPunctuation(value as any)} />
               </Grid.Col>
             </Grid>
             <Flex justify="center">
