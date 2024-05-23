@@ -1,10 +1,11 @@
-import { Container, Button, Switch, Flex, Box, Grid, Textarea, rem } from '@mantine/core';
+import { Container, Text, Button, Switch, Flex, Box, Grid, ActionIcon, rem } from '@mantine/core';
 import commonClasses from '../styles/common.module.css';
+import Textarea from '../components/Textarea/Textarea';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { Tokeniser as Token } from 'taibun';
 import { useClipboard } from '@mantine/hooks';
-import { IconCopy, IconCheck } from '@tabler/icons-react';
+import { IconCopy, IconCheck, IconVolume, IconX } from '@tabler/icons-react';
 
 export default function Tokeniser() {
   const [keepOriginal, setKeepOriginal] = useState<boolean>(true);
@@ -23,28 +24,28 @@ export default function Tokeniser() {
       <Container size={1200} my='lg' pos="relative">
         <Grid gutter="md" grow={false}>
           <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
-            <Textarea size="xl" radius="md" placeholder={t('transliterator.enter')} minRows={10} maxRows={10} autosize
-              onChange={event => setInputValue(event.target.value)} />
+            <Textarea placeholder={t('transliterator.enter')} onChange={event => setInputValue(event.target.value)}
+              topRight={<ActionIcon variant="light" radius="xl" size="xl"
+                onClick={() => clipboard.copy(outputValue)}>
+                <IconX style={{ width: rem(20) }} />
+              </ActionIcon>}
+              bottomRight={<Text py="xs" c="dimmed">0 character(s)</Text>}
+            />
           </Grid.Col>
           <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
-            <Textarea size="xl" radius="md" placeholder={t('tokeniser.output')} minRows={10} maxRows={10} autosize
-              variant="filled" value={outputValue} readOnly />
-            <Flex mt='lg' justify="center">
-              <Button variant="light" radius="xl" size="md"
-                rightSection={
-                  clipboard.copied ? (
-                    <IconCheck style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
-                  ) : (
-                    <IconCopy style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
-                  )
-                }
-                styles={{
-                  root: { paddingRight: rem(14), height: rem(48) },
-                  section: { marginLeft: rem(22) },
-                }}
-                onClick={() => clipboard.copy(outputValue)}
-              >{t('transliterator.copy')}</Button>
-            </Flex>
+            <Textarea readOnly placeholder={t('tokeniser.output')} value={outputValue}
+              bottomLeft={<ActionIcon variant="light" radius="xl" size="xl"
+                onClick={() => clipboard.copy(outputValue)}>
+                <IconVolume style={{ width: rem(20) }} />
+              </ActionIcon>}
+              bottomRight={<ActionIcon variant="light" radius="xl" size="xl"
+                onClick={() => clipboard.copy(outputValue)}>
+                {clipboard.copied ? (
+                  <IconCheck style={{ width: rem(20) }} />
+                ) : (
+                  <IconCopy style={{ width: rem(20) }} />
+                )}
+              </ActionIcon>} />
           </Grid.Col>
           <Container>
             <Flex justify="center">

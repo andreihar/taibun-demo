@@ -81,7 +81,7 @@ export default function Transliterator() {
           <Container>
             <Grid>
               <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select label={t('transliterator.system.label')} data={[
+                <Select label={t('transliterator.system.label')} allowDeselect={false} data={[
                   { value: 'Tailo', label: t('transliterator.system.tailo') },
                   { value: 'POJ', label: t('transliterator.system.poj') },
                   { value: 'Zhuyin', label: t('transliterator.system.zhuyin') },
@@ -89,20 +89,20 @@ export default function Transliterator() {
                   { value: 'Pingyim', label: t('transliterator.system.pingyim') },
                   { value: 'Tongiong', label: t('transliterator.system.tongiong') },
                   { value: 'IPA', label: t('transliterator.system.ipa') },
-                ]} value={system} onChange={(value) => value !== null && setSystem(value as any)} />
+                ]} value={system} onChange={(value) => setSystem(value as any)} />
               </Grid.Col>
               <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select label={t('transliterator.dialect.label')} data={[
+                <Select label={t('transliterator.dialect.label')} allowDeselect={false} data={[
                   { value: 'south', label: t('transliterator.dialect.south') },
                   { value: 'north', label: t('transliterator.dialect.north') },
-                ]} value={dialect} onChange={(value) => value !== null && setDialect(value as any)} />
+                ]} value={dialect} onChange={(value) => setDialect(value as any)} />
               </Grid.Col>
               <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select label={t('transliterator.format.label')} data={[
+                <Select label={t('transliterator.format.label')} allowDeselect={false} data={[
                   { value: 'mark', label: t('transliterator.format.mark') },
                   { value: 'number', label: t('transliterator.format.number') },
                   { value: 'strip', label: t('transliterator.format.strip') },
-                ]} value={format} onChange={(value) => value !== null && setFormat(value as any)} />
+                ]} value={format} onChange={(value) => setFormat(value as any)} />
               </Grid.Col>
               <Grid.Col span={{ base: 6, md: 4 }}>
                 <Box mt={4}>
@@ -122,19 +122,19 @@ export default function Transliterator() {
                 </Box>
               </Grid.Col>
               <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select label={t('transliterator.sandhi.label')} id="sandhi" data={[
+                <Select label={t('transliterator.sandhi.label')} allowDeselect={false} data={[
                   { value: 'default', label: t('transliterator.sandhi.default') },
                   { value: 'auto', label: t('transliterator.sandhi.auto') },
                   { value: 'none', label: t('transliterator.sandhi.none') },
                   { value: 'excLast', label: t('transliterator.sandhi.excLast') },
                   { value: 'inclLast', label: t('transliterator.sandhi.inclLast') },
-                ]} value={sandhi} onChange={(value) => value !== null && setSandhi(value as any)} />
+                ]} value={sandhi} onChange={(value) => setSandhi(value as any)} />
               </Grid.Col>
               <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select label={t('transliterator.punctuation.label')} data={[
+                <Select label={t('transliterator.punctuation.label')} allowDeselect={false} data={[
                   { value: 'format', label: t('transliterator.punctuation.format') },
                   { value: 'none', label: t('transliterator.punctuation.none') },
-                ]} value={punctuation} onChange={(value) => value !== null && setPunctuation(value as any)} />
+                ]} value={punctuation} onChange={(value) => setPunctuation(value as any)} />
               </Grid.Col>
             </Grid>
             <Flex justify="center">
