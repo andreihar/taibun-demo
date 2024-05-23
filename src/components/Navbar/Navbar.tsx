@@ -70,7 +70,7 @@ export default function Navbar() {
         </Group>
       </Box>
 
-      <Drawer opened={drawerOpened} onClose={closeDrawer} size="100%" padding="md" title="Taibun" hiddenFrom="md" zIndex={1000000}>
+      <Drawer opened={drawerOpened} onClose={closeDrawer} size="100%" padding="md" title="" hiddenFrom="md" zIndex={1000000}>
         <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
           <Divider my="sm" />
 

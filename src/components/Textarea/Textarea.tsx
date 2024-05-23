@@ -10,9 +10,10 @@ interface TextareaProps {
   readOnly?: boolean;
   placeholder?: string;
   value?: string | number | string[];
+  cn?: boolean;
 }
 
-const Textarea: React.FC<TextareaProps> = ({ topRight, bottomRight, bottomLeft, onChange, readOnly, placeholder, value }) => {
+const Textarea: React.FC<TextareaProps> = ({ topRight, bottomRight, bottomLeft, onChange, readOnly, placeholder, value, cn }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const topRightRef = useRef<HTMLDivElement>(null);
   const bottomRightRef = useRef<HTMLDivElement>(null);
@@ -38,12 +39,13 @@ const Textarea: React.FC<TextareaProps> = ({ topRight, bottomRight, bottomLeft, 
       {bottomRight && <div ref={bottomRightRef} style={{ position: 'absolute', bottom: '0.5em', right: '0.5em' }}>{bottomRight}</div>}
       {bottomLeft && <div ref={bottomLeftRef} style={{ position: 'absolute', bottom: '0.5em', left: '0.5em' }}>{bottomLeft}</div>}
       <TextareaAutosize
-        className={commonClasses.textarea}
+        className={`${commonClasses.textarea} ${cn ? commonClasses.zhCn : ''}`}
         ref={textareaRef}
         minRows={10}
         readOnly={readOnly}
         placeholder={placeholder}
         value={value}
+        lang={cn ? 'zh-cn' : 'zh-tw'}
         style={{
           width: '100%',
           marginTop: '2px',

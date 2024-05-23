@@ -6,11 +6,15 @@ export const en = {
       characters: "Set Converter",
       about: "About"
     },
-    transliterator: {
+    input: {
       enter: "Enter text here...",
-      output: "Transliterated text",
       convert: "Convert Text",
       copy: "Copy to Clipboard",
+      keyWithCount_one: "{{count}} character",
+      keyWithCount_other: "{{count}} characters"
+    },
+    transliterator: {
+      output: "Transliterated text",
       system: {
         label: "System",
         tailo: "Tâi-lô",

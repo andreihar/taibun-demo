@@ -6,11 +6,15 @@ export const zh = {
       characters: "簡繁體轉換",
       about: "關於"
     },
-    transliterator: {
+    input: {
       enter: "在此輸入文字……",
-      output: "已音譯文字",
       convert: "轉換文字",
       copy: "複製到剪貼板",
+      key: "字",
+      keyWithCount: "{{count}} 字"
+    },
+    transliterator: {
+      output: "已音譯文字",
       system: {
         label: "系統",
         tailo: "臺羅",

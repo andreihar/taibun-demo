@@ -6,6 +6,9 @@ html {
 	scroll-behavior: smooth;
 	scroll-padding-top: 65px;
 }
+.zhCn {
+	font-family: 'Noto Sans SC', 'Noto Sans TC', sans-serif;
+}
 ::-webkit-scrollbar {
 	width: 10px;
 }
