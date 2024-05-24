@@ -7,8 +7,8 @@ import Transliterator from "./pages/Transliterator";
 import Tokeniser from "./pages/Tokeniser";
 import Converter from "./pages/Converter";
 import About from "./pages/About";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const theme = {
   primaryColor: 'red',

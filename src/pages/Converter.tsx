@@ -1,6 +1,6 @@
 import { Container, Text, Button, ActionIcon, Flex, Box, Grid, rem } from '@mantine/core';
-import Textarea from '../components/Textarea/Textarea';
-import commonClasses from '../styles/common.module.css';
+import Textarea from '../components/Textarea';
+import classes from '../styles/common.module.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { toSimplified, toTraditional } from 'taibun';
@@ -27,7 +27,7 @@ export default function Converter() {
   }, [inputValue, mode]);
 
   return (
-    <Box className={commonClasses.wrapper}>
+    <Box className={classes.wrapper}>
       <Container size={1200} my='lg' pos="relative">
         <Grid gutter="md" grow={false}>
           <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>

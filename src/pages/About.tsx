@@ -1,6 +1,6 @@
 import { Container, Text, Title, Button, Group, Box, Image, Avatar, ActionIcon, ThemeIcon, SimpleGrid, Flex, rem } from '@mantine/core';
 import { GithubIcon } from '@mantinex/dev-icons';
-import commonClasses from '../styles/common.module.css';
+import classes from '../styles/common.module.css';
 import { Trans, useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import image from '../assets/mail.svg';
@@ -32,7 +32,7 @@ export default function About() {
 
   return (
     <>
-      <Box bgsz="cover" bgp="center" className={commonClasses.wrapper} style={{ backgroundImage: `linear-gradient(250deg, rgba(130, 201, 30, 0) 0%, #062343 70%), url(${background})`, paddingTop: `calc(var(--mantine-spacing-xl) * 3)`, paddingBottom: `calc(var(--mantine-spacing-xl) * 3)`, minHeight: `calc(100vh - 60px)` }}>
+      <Box bgsz="cover" bgp="center" className={classes.wrapper} style={{ backgroundImage: `linear-gradient(250deg, rgba(130, 201, 30, 0) 0%, #062343 70%), url(${background})`, minHeight: `calc(100vh - 60px)` }}>
         <Container pos='relative' size={700}>
           <Title c='white' fz={{ base: '42', sm: '62' }} lh={{ base: '1.1', sm: '1.0' }} fw={900} m={0} p={0}>
             <Trans
@@ -51,7 +51,7 @@ export default function About() {
           </Group>
         </Container>
       </Box >
-      <Box className={commonClasses.wrapper} style={{ minHeight: `calc(100vh - 60px)` }}>
+      <Box className={classes.wrapper} style={{ minHeight: `calc(100vh - 60px)` }}>
         <Container size="lg">
           <Title id="features" mt="md" ta="center">{t('about.title2')}</Title>
           <SimpleGrid mt={60} cols={{ base: 1, sm: 2 }} spacing={{ base: 'xl', md: 50 }} verticalSpacing={{ base: 'xl', md: 50 }}>

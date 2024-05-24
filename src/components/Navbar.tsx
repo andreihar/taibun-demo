@@ -2,11 +2,11 @@ import cx from 'clsx';
 import { Text, Group, Box, Divider, Burger, Drawer, ScrollArea, rem, SegmentedControl, Image, ActionIcon, Flex, useMantineColorScheme, useComputedColorScheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconSun, IconMoon } from '@tabler/icons-react';
-import classes from './Navbar.module.css';
+import classes from '../styles/common.module.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.png';
+import logo from '../assets/logo.png';
 
 export default function Navbar() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
@@ -27,8 +27,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <Box className={classes.navbar} pos="sticky" top={0}>
-      <Box className={classes.header} style={{ height: rem(60) }} px="lg">
+    <Box className={classes.navbar} pos="sticky" top={0} style={{ backgroundColor: `light-dark(white, #333)` }}>
+      <Box className={classes.header} style={{ height: rem(60), borderBottom: `rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))`, boxShadow: `var(--mantine-shadow-md)` }} px="lg">
         <Group justify="space-between" h="100%">
           <Link to="/" style={{ textDecorationLine: 'none', color: 'inherit' }}>
             <Group>

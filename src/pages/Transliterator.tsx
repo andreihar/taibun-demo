@@ -1,6 +1,6 @@
-import { Container, Text, TextInput, Button, Switch, Flex, Box, Grid, Select, Checkbox, ActionIcon, rem } from '@mantine/core';
-import Textarea from '../components/Textarea/Textarea';
-import commonClasses from '../styles/common.module.css';
+import { Container, Text, TextInput, Switch, Flex, Box, Grid, Select, Checkbox, ActionIcon, rem } from '@mantine/core';
+import Textarea from '../components/Textarea';
+import classes from '../styles/common.module.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState, useRef } from 'react';
 import { Converter } from 'taibun';
@@ -64,7 +64,7 @@ export default function Transliterator() {
   };
 
   return (
-    <Box pos='relative' className={commonClasses.wrapper}>
+    <Box pos='relative' className={classes.wrapper}>
       <Container size={1200} my='lg' pos="relative">
         <Grid gutter="md" grow={false}>
           <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
@@ -152,7 +152,7 @@ export default function Transliterator() {
               </Grid.Col>
             </Grid>
             <Flex justify="center">
-              <Switch size="md" onLabel="ON" offLabel="OFF" label={t('input.convertNonCjk')} mt="md" fw={500} checked={convertNonCjk} onChange={event => setConvertNonCjk(event.target.checked)} />
+              <Switch size="md" onLabel="ON" offLabel="OFF" label={t('transliterator.convertNonCjk')} mt="md" fw={500} checked={convertNonCjk} onChange={event => setConvertNonCjk(event.target.checked)} />
             </Flex>
           </Container>
         </Grid>

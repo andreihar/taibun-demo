@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import commonClasses from '../../styles/common.module.css';
+import classes from '../styles/common.module.css';
 
 interface TextareaProps {
   topRight?: React.ReactNode;
@@ -34,35 +34,18 @@ const Textarea: React.FC<TextareaProps> = ({ topRight, bottomRight, bottomLeft, 
   }, [topRight, bottomRight, bottomLeft]);
 
   return (
-    <div className={`${commonClasses.textareaContainer} ${readOnly ? commonClasses.textReadonly : ''}`} style={{ position: 'relative', borderRadius: '0.5rem' }}>
+    <div className={`${classes.textareaContainer} ${readOnly ? classes.textReadonly : ''}`} style={{ position: 'relative', borderRadius: '0.5rem' }}>
       {topRight && <div ref={topRightRef} style={{ position: 'absolute', top: '0.5em', right: '0.5em' }}>{topRight}</div>}
       {bottomRight && <div ref={bottomRightRef} style={{ position: 'absolute', bottom: '0.5em', right: '0.5em' }}>{bottomRight}</div>}
       {bottomLeft && <div ref={bottomLeftRef} style={{ position: 'absolute', bottom: '0.5em', left: '0.5em' }}>{bottomLeft}</div>}
       <TextareaAutosize
-        className={`${commonClasses.textarea} ${cn ? commonClasses.zhCn : ''}`}
-        ref={textareaRef}
-        minRows={10}
-        readOnly={readOnly}
-        placeholder={placeholder}
-        value={value}
-        lang={cn ? 'zh-cn' : 'zh-tw'}
+        className={`${classes.textarea} ${cn ? classes.zhCn : ''}`} ref={textareaRef} onChange={onChange}
+        minRows={10} readOnly={readOnly} placeholder={placeholder} value={value} lang={cn ? 'zh-cn' : 'zh-tw'}
         style={{
-          width: '100%',
-          marginTop: '2px',
-          paddingTop: '11px',
-          paddingLeft: '20px',
-          paddingRight: `calc(${paddingRight} + 5px)`,
-          paddingBottom: `calc(${paddingBottom} + 5px)`,
-          border: 'none',
-          borderRadius: '4px',
-          outline: 'none',
-          resize: 'none',
-          overflow: "hidden",
-          fontSize: '1.25rem',
-          color: `var(--mantine-color-text)`,
-          backgroundColor: 'transparent'
+          width: '100%', marginTop: '2px', paddingTop: '11px', paddingLeft: '20px', paddingRight: `calc(${paddingRight} + 5px)`, paddingBottom: `calc(${paddingBottom} + 5px)`,
+          border: 'none', borderRadius: '4px', outline: 'none', resize: 'none', overflow: "hidden", fontSize: '1.25rem',
+          color: `var(--mantine-color-text)`, backgroundColor: 'transparent'
         }}
-        onChange={onChange}
       />
     </div>
   );

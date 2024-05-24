@@ -1,6 +1,6 @@
 import { Container, Text, Switch, Flex, Box, Grid, ActionIcon, rem } from '@mantine/core';
-import commonClasses from '../styles/common.module.css';
-import Textarea from '../components/Textarea/Textarea';
+import classes from '../styles/common.module.css';
+import Textarea from '../components/Textarea';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { Tokeniser as Token } from 'taibun';
@@ -20,7 +20,7 @@ export default function Tokeniser() {
   }, [keepOriginal, inputValue]);
 
   return (
-    <Box className={commonClasses.wrapper}>
+    <Box className={classes.wrapper}>
       <Container size={1200} my='lg' pos="relative">
         <Grid gutter="md" grow={false}>
           <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>

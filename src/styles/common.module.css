@@ -22,6 +22,7 @@ html {
 	background: rgba(0, 0, 0, .60);
 }
 
+/* General */
 .wrapper {
 	position: relative;
 	box-sizing: border-box;
@@ -35,6 +36,72 @@ html {
 	width: 100%;
 }
 
+/* Navbar */
+.navbar {
+	z-index: 1000;
+}
+.link {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	padding-left: var(--mantine-spacing-md);
+	padding-right: var(--mantine-spacing-md);
+	text-decoration: none;
+	color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+	font-weight: 500;
+	font-size: var(--mantine-font-size-lg);
+
+	@media (max-width: $mantine-breakpoint-md) {
+		height: rem(42px);
+		width: 100%;
+	}
+	@mixin hover {
+		background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+	}
+}
+
+/* Control */
+.indicator {
+	background-image: linear-gradient(
+		to right,
+		var(--mantine-color-red-filled),
+		var(--mantine-color-orange-filled)
+	);
+}
+.control {
+	&::before {
+		display: none;
+	}
+}
+.label {
+	font-weight: 700;
+	&,
+	&:hover {
+		&[data-active] {
+		color: var(--mantine-color-white);
+		}
+	}
+}
+
+/* Colour Scheme */
+.dark {
+	@mixin dark {
+		display: none;
+	}
+	@mixin light {
+		display: block;
+	}
+}
+.light {
+	@mixin dark {
+		display: block;
+	}
+	@mixin light {
+		display: none;
+	}
+}
+
+/* Textarea */
 .textareaContainer {
 	position: relative;
 	border-radius: 0.5rem;
