@@ -55,7 +55,7 @@ export default function Transliterator() {
 
   const playAudio = async () => {
     setStatus('loading');
-    const c = new Converter({ format: 'number' });
+    const c = new Converter({ dialect, format: 'number' });
     const src = encodeURI("https://hapsing.ithuan.tw/bangtsam?taibun=") + encodeURIComponent(c.get(inputValue).toLowerCase());
     audioRef.current = new Audio(src);
     audioRef.current.oncanplaythrough = () => setStatus('playing');
