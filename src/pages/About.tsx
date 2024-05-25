@@ -25,8 +25,8 @@ export default function About() {
       <ThemeIcon size={44} radius="md" variant="gradient" gradient={{ deg: 133, from: 'red', to: 'orange' }}>
         <feature.icon style={{ width: rem(26), height: rem(26) }} stroke={1.5} />
       </ThemeIcon>
-      <Text fz="lg" mt="sm" fw={500}>{feature.title}</Text>
-      <Text c="dimmed" fz="md">{feature.description}</Text>
+      <Text fz="xl" mt="sm" fw={500}>{feature.title}</Text>
+      <Text c="dimmed" fz="lg">{feature.description}</Text>
     </Box>
   ));
 
