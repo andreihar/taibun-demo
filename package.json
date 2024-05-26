@@ -19,7 +19,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^14.1.1",
     "react-router-dom": "^6.23.1",
-    "taibun": "^1.0.5"
+    "taibun": "^1.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.65",
