@@ -28,7 +28,8 @@ export const en = {
       dialect: {
         label: "Dialect",
         south: "Zhangzhou-leaning",
-        north: "Quanzhou-leaning"
+        north: "Quanzhou-leaning",
+        singapore: "Singaporean"
       },
       format: {
         label: "Tone Format",

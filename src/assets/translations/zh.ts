@@ -28,7 +28,8 @@ export const zh = {
       dialect: {
         label: "發音",
         south: "偏漳腔",
-        north: "偏泉腔"
+        north: "偏泉腔",
+        singapore: "新加坡腔"
       },
       format: {
         label: "聲調的格式",

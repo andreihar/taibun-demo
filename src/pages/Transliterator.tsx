@@ -10,7 +10,7 @@ import { IconCopy, IconCheck, IconVolume, IconX, IconSquare } from '@tabler/icon
 
 export default function Transliterator() {
   const [system, setSystem] = useState<'Tailo' | 'POJ' | 'Zhuyin' | 'TLPA' | 'Pingyim' | 'Tongiong' | 'IPA'>('Tailo');
-  const [dialect, setDialect] = useState<'south' | 'north'>('south');
+  const [dialect, setDialect] = useState<'south' | 'north' | 'singapore'>('south');
   const [format, setFormat] = useState<'mark' | 'number' | 'strip'>('mark');
   const [delimiter, setDelimiter] = useState<string>('');
   const [useCustomDelimiter, setUseCustomDelimiter] = useState<boolean>(false);
@@ -123,6 +123,7 @@ export default function Transliterator() {
                   <Select size="md" label={t('transliterator.dialect.label')} allowDeselect={false} data={[
                     { value: 'south', label: t('transliterator.dialect.south') },
                     { value: 'north', label: t('transliterator.dialect.north') },
+                    { value: 'singapore', label: t('transliterator.dialect.singapore') },
                   ]} value={dialect} onChange={(value) => setDialect(value as any)} />
                 </Grid.Col>
                 <Grid.Col span={{ base: 6, md: 4 }}>
