@@ -160,7 +160,7 @@ Because Taibun is MIT-licensed, any developer can essentially do whatever they w
 <!-- Badges and their links -->
 [contributors-badge]: https://img.shields.io/badge/Contributors-1-44cc11?style=for-the-badge
 [contributors]: #contributors
-[licence-badge]: https://img.shields.io/github/license/andreihar/taibun.svg?color=000000&style=for-the-badge
+[licence-badge]: https://img.shields.io/github/license/andreihar/taibun-demo.svg?color=000000&style=for-the-badge
 [licence]: LICENSE
 [linkedin-badge]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 [linkedin]: https://www.linkedin.com/in/andreihar/
