@@ -3,6 +3,7 @@ import { GithubIcon } from '@mantinex/dev-icons';
 import classes from '../styles/common.module.css';
 import { Trans, useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import image from '../assets/mail.svg';
 import background from '../assets/background.jpg';
 import { IconAt, IconBrandLinkedin, IconBrandGithub, IconLanguageKatakana, IconBrandDouban, IconDevices2, IconReceiptOff } from '@tabler/icons-react';
@@ -32,6 +33,10 @@ export default function About() {
 
   return (
     <>
+      <Helmet>
+        <title>{t('navbar.about')} | Taibun</title>
+        <meta name="description" content={t('about.description').split(/!|！/).map(sentence => sentence.trim())[1] || ''} />
+      </Helmet>
       <Box bgsz="cover" bgp="center" className={classes.wrapper} style={{ backgroundImage: `linear-gradient(250deg, rgba(130, 201, 30, 0) 0%, #062343 70%), url(${background})`, minHeight: `calc(100vh - 60px)` }}>
         <Container pos='relative' size={700}>
           <Title c='white' fz={{ base: '42', sm: '62' }} lh={{ base: '1.1', sm: '1.0' }} fw={900} m={0} p={0}>
@@ -42,10 +47,10 @@ export default function About() {
           </Title>
           <Text c='white' opacity={0.85} mt='xl' fz={{ 'base': 20, 'sm': 24 }}>{t('about.description')}</Text>
           <Group mt="xl">
-            <Button component="a" href="#features" size="xl" px={{ base: '18', sm: '38' }} h={54} flex={{ base: '1', sm: 'none' }} variant="gradient" gradient={{ from: 'red', to: 'orange' }}>
+            <Button component="a" href="#features" size="xl" px={{ base: '18', sm: '38' }} h={54} flex={{ base: '1', sm: 'none' }} variant="gradient" gradient={{ from: 'red', to: 'orange' }} aria-label={t('about.features')}>
               {t('about.features')}
             </Button>
-            <Button component="a" href="https://github.com/andreihar/taibun" target="_blank" size="xl" variant="default" px={{ base: '18', sm: '38' }} h={54} flex={{ base: '1', sm: 'none' }} leftSection={<GithubIcon size={20} />}>
+            <Button component="a" href="https://github.com/andreihar/taibun" target="_blank" size="xl" variant="default" px={{ base: '18', sm: '38' }} h={54} flex={{ base: '1', sm: 'none' }} leftSection={<GithubIcon size={20} />} aria-label="GitHub Repository">
               GitHub
             </Button>
           </Group>
@@ -75,7 +80,7 @@ export default function About() {
                 </ActionIcon>
               </Box>
             </Box>
-            <Box style={{ flex: 1 }}><Avatar h={200} w={200} src="https://avatars.githubusercontent.com/u/72668861?v=4" /></Box>
+            <Box style={{ flex: 1 }}><Avatar h={200} w={200} src="https://avatars.githubusercontent.com/u/72668861?v=4" alt="Samuel Jen" /></Box>
           </Flex>
         </Container >
       </Box >
@@ -99,7 +104,7 @@ export default function About() {
                 </ActionIcon>
               </Box>
             </Box>
-            <Image src={image} maw={{ base: '100%', sm: '50%' }} />
+            <Image src={image} maw={{ base: '100%', sm: '50%' }} alt="Mail illustration" />
           </Flex>
         </Container >
       </Box>

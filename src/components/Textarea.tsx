@@ -46,6 +46,8 @@ const Textarea: React.FC<TextareaProps> = ({ topRight, bottomRight, bottomLeft, 
           border: 'none', borderRadius: '4px', outline: 'none', resize: 'none', overflow: "hidden", fontSize: '1.25rem',
           color: `var(--mantine-color-text)`, backgroundColor: 'transparent'
         }}
+        aria-label={readOnly ? 'Transliteration of Chinese Characters' : 'Input for Chinese Characters'}
+        id={readOnly ? 'output' : 'input'} aria-live={readOnly ? 'polite' : undefined}
       />
     </div>
   );

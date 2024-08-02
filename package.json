@@ -17,6 +17,8 @@
     "clsx": "^2.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.5",
     "react-i18next": "^14.1.1",
     "react-router-dom": "^6.23.1",
     "taibun": "^1.1.0"
@@ -24,6 +26,7 @@
   "devDependencies": {
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.2.21",
+    "@types/react-helmet": "^6.1.11",
     "@vitejs/plugin-react": "^4.2.1",
     "postcss": "^8.4.35",
     "postcss-preset-mantine": "1.15.0",

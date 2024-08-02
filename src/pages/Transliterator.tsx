@@ -3,6 +3,7 @@ import Textarea from '../components/Textarea';
 import classes from '../styles/common.module.css';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Converter } from 'taibun';
 import { useClipboard } from '@mantine/hooks';
 import { IconCopy, IconCheck, IconVolume, IconX, IconSquare } from '@tabler/icons-react';
@@ -72,96 +73,102 @@ export default function Transliterator() {
   };
 
   return (
-    <Box pos='relative' className={classes.wrapper}>
-      <Container size={1200} my='lg' pos="relative">
-        <Grid gutter="md" grow={false}>
-          <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
-            <Textarea value={inputValue} placeholder={t('input.enter')} onChange={event => setInputValue(event.target.value)}
-              topRight={
-                <ActionIcon variant="light" radius="xl" size="xl"
-                  onClick={() => setInputValue('')}>
-                  <IconX style={{ width: rem(20) }} />
-                </ActionIcon>}
-              bottomRight={<Text py="xs" pe="xs" c="dimmed">{t('input.keyWithCount', { count: inputValue.length })}</Text>}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
-            <Textarea readOnly placeholder={t('transliterator.output')} value={outputValue}
-              bottomLeft={
-                <ActionIcon loading={status === 'loading'} variant="light" radius="xl" size="xl"
-                  onClick={status === 'playing' ? stopAudio : playAudio}>
-                  {status === 'playing' ? <IconSquare style={{ width: rem(20) }} /> : <IconVolume style={{ width: rem(20) }} />}
-                </ActionIcon>}
-              bottomRight={
-                <ActionIcon variant="light" radius="xl" size="xl"
-                  onClick={() => clipboard.copy(outputValue)}>
-                  {clipboard.copied ? (<IconCheck style={{ width: rem(20) }} />
-                  ) : (<IconCopy style={{ width: rem(20) }} />)}
-                </ActionIcon>}
-            />
-          </Grid.Col>
-          <Container>
-            <Grid>
-              <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select size="md" label={t('transliterator.system.label')} allowDeselect={false} data={[
-                  { value: 'Tailo', label: t('transliterator.system.tailo') },
-                  { value: 'POJ', label: t('transliterator.system.poj') },
-                  { value: 'Zhuyin', label: t('transliterator.system.zhuyin') },
-                  { value: 'TLPA', label: t('transliterator.system.tlpa') },
-                  { value: 'Pingyim', label: t('transliterator.system.pingyim') },
-                  { value: 'Tongiong', label: t('transliterator.system.tongiong') },
-                  { value: 'IPA', label: t('transliterator.system.ipa') },
-                ]} value={system} onChange={(value) => setSystem(value as any)} />
-              </Grid.Col>
-              <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select size="md" label={t('transliterator.dialect.label')} allowDeselect={false} data={[
-                  { value: 'south', label: t('transliterator.dialect.south') },
-                  { value: 'north', label: t('transliterator.dialect.north') },
-                ]} value={dialect} onChange={(value) => setDialect(value as any)} />
-              </Grid.Col>
-              <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select size="md" label={t('transliterator.format.label')} allowDeselect={false} data={[
-                  { value: 'mark', label: t('transliterator.format.mark') },
-                  { value: 'number', label: t('transliterator.format.number') },
-                  { value: 'strip', label: t('transliterator.format.strip') },
-                ]} value={format} onChange={(value) => setFormat(value as any)} />
-              </Grid.Col>
-              <Grid.Col span={{ base: 6, md: 4 }}>
-                <Box mt={4}>
-                  <Text size="md" fw={500} >{t('transliterator.delimiter')}</Text>
-                  <Flex align="center" style={{ width: '100%' }}>
-                    <Checkbox checked={useCustomDelimiter} size="md" style={{ flexShrink: 0 }}
-                      onChange={event => setUseCustomDelimiter(event.target.checked)}
-                    />
-                    <TextInput value={delimiter} size="md" disabled={!useCustomDelimiter}
-                      onChange={event => setDelimiter(event.target.value)}
-                      style={{ marginLeft: '10px', flexGrow: 1 }}
-                    />
-                  </Flex>
-                </Box>
-              </Grid.Col>
-              <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select size="md" label={t('transliterator.sandhi.label')} allowDeselect={false} data={[
-                  { value: 'default', label: t('transliterator.sandhi.default') },
-                  { value: 'auto', label: t('transliterator.sandhi.auto') },
-                  { value: 'none', label: t('transliterator.sandhi.none') },
-                  { value: 'excLast', label: t('transliterator.sandhi.excLast') },
-                  { value: 'inclLast', label: t('transliterator.sandhi.inclLast') },
-                ]} value={sandhi} onChange={(value) => setSandhi(value as any)} />
-              </Grid.Col>
-              <Grid.Col span={{ base: 6, md: 4 }}>
-                <Select size="md" label={t('transliterator.punctuation.label')} allowDeselect={false} data={[
-                  { value: 'format', label: t('transliterator.punctuation.format') },
-                  { value: 'none', label: t('transliterator.punctuation.none') },
-                ]} value={punctuation} onChange={(value) => setPunctuation(value as any)} />
-              </Grid.Col>
-            </Grid>
-            <Flex justify="center">
-              <Switch size="lg" onLabel="ON" offLabel="OFF" label={t('transliterator.convertNonCjk')} mt="md" fw={500} checked={convertNonCjk} onChange={event => setConvertNonCjk(event.target.checked)} />
-            </Flex>
-          </Container>
-        </Grid>
-      </Container>
-    </Box>
+    <>
+      <Helmet>
+        <title>{t('navbar.transliterator')} | Taibun</title>
+        <meta name="description" content={t('about.description').split(/!|！/).map(sentence => sentence.trim())[1] || ''} />
+      </Helmet>
+      <Box pos='relative' className={classes.wrapper}>
+        <Container size={1200} my='lg' pos="relative">
+          <Grid gutter="md" grow={false}>
+            <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
+              <Textarea value={inputValue} placeholder={t('input.enter')} onChange={event => setInputValue(event.target.value)}
+                topRight={
+                  <ActionIcon variant="light" radius="xl" size="xl" aria-label="Clear the Input"
+                    onClick={() => setInputValue('')}>
+                    <IconX style={{ width: rem(20) }} />
+                  </ActionIcon>}
+                bottomRight={<Text py="xs" pe="xs" c="dimmed">{t('input.keyWithCount', { count: inputValue.length })}</Text>}
+              />
+            </Grid.Col>
+            <Grid.Col span={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 6 }}>
+              <Textarea readOnly placeholder={t('transliterator.output')} value={outputValue}
+                bottomLeft={
+                  <ActionIcon loading={status === 'loading'} variant="light" radius="xl" size="xl" aria-label={status === 'playing' ? 'Stop Audio' : 'Play Audio'}
+                    onClick={status === 'playing' ? stopAudio : playAudio}>
+                    {status === 'playing' ? <IconSquare style={{ width: rem(20) }} /> : <IconVolume style={{ width: rem(20) }} />}
+                  </ActionIcon>}
+                bottomRight={
+                  <ActionIcon variant="light" radius="xl" size="xl" aria-label={clipboard.copied ? 'Copied' : 'Copy the Output'}
+                    onClick={() => clipboard.copy(outputValue)}>
+                    {clipboard.copied ? (<IconCheck style={{ width: rem(20) }} />
+                    ) : (<IconCopy style={{ width: rem(20) }} />)}
+                  </ActionIcon>}
+              />
+            </Grid.Col>
+            <Container>
+              <Grid>
+                <Grid.Col span={{ base: 6, md: 4 }}>
+                  <Select size="md" label={t('transliterator.system.label')} allowDeselect={false} data={[
+                    { value: 'Tailo', label: t('transliterator.system.tailo') },
+                    { value: 'POJ', label: t('transliterator.system.poj') },
+                    { value: 'Zhuyin', label: t('transliterator.system.zhuyin') },
+                    { value: 'TLPA', label: t('transliterator.system.tlpa') },
+                    { value: 'Pingyim', label: t('transliterator.system.pingyim') },
+                    { value: 'Tongiong', label: t('transliterator.system.tongiong') },
+                    { value: 'IPA', label: t('transliterator.system.ipa') },
+                  ]} value={system} onChange={(value) => setSystem(value as any)} />
+                </Grid.Col>
+                <Grid.Col span={{ base: 6, md: 4 }}>
+                  <Select size="md" label={t('transliterator.dialect.label')} allowDeselect={false} data={[
+                    { value: 'south', label: t('transliterator.dialect.south') },
+                    { value: 'north', label: t('transliterator.dialect.north') },
+                  ]} value={dialect} onChange={(value) => setDialect(value as any)} />
+                </Grid.Col>
+                <Grid.Col span={{ base: 6, md: 4 }}>
+                  <Select size="md" label={t('transliterator.format.label')} allowDeselect={false} data={[
+                    { value: 'mark', label: t('transliterator.format.mark') },
+                    { value: 'number', label: t('transliterator.format.number') },
+                    { value: 'strip', label: t('transliterator.format.strip') },
+                  ]} value={format} onChange={(value) => setFormat(value as any)} />
+                </Grid.Col>
+                <Grid.Col span={{ base: 6, md: 4 }}>
+                  <Box mt={4}>
+                    <Text size="md" fw={500} >{t('transliterator.delimiter')}</Text>
+                    <Flex align="center" style={{ width: '100%' }}>
+                      <Checkbox checked={useCustomDelimiter} size="md" style={{ flexShrink: 0 }}
+                        onChange={event => setUseCustomDelimiter(event.target.checked)}
+                      />
+                      <TextInput value={delimiter} size="md" disabled={!useCustomDelimiter}
+                        onChange={event => setDelimiter(event.target.value)}
+                        style={{ marginLeft: '10px', flexGrow: 1 }}
+                      />
+                    </Flex>
+                  </Box>
+                </Grid.Col>
+                <Grid.Col span={{ base: 6, md: 4 }}>
+                  <Select size="md" label={t('transliterator.sandhi.label')} allowDeselect={false} data={[
+                    { value: 'default', label: t('transliterator.sandhi.default') },
+                    { value: 'auto', label: t('transliterator.sandhi.auto') },
+                    { value: 'none', label: t('transliterator.sandhi.none') },
+                    { value: 'excLast', label: t('transliterator.sandhi.excLast') },
+                    { value: 'inclLast', label: t('transliterator.sandhi.inclLast') },
+                  ]} value={sandhi} onChange={(value) => setSandhi(value as any)} />
+                </Grid.Col>
+                <Grid.Col span={{ base: 6, md: 4 }}>
+                  <Select size="md" label={t('transliterator.punctuation.label')} allowDeselect={false} data={[
+                    { value: 'format', label: t('transliterator.punctuation.format') },
+                    { value: 'none', label: t('transliterator.punctuation.none') },
+                  ]} value={punctuation} onChange={(value) => setPunctuation(value as any)} />
+                </Grid.Col>
+              </Grid>
+              <Flex justify="center">
+                <Switch size="lg" onLabel="ON" offLabel="OFF" label={t('transliterator.convertNonCjk')} mt="md" fw={500} checked={convertNonCjk} onChange={event => setConvertNonCjk(event.target.checked)} />
+              </Flex>
+            </Container>
+          </Grid>
+        </Container>
+      </Box>
+    </>
   );
 }

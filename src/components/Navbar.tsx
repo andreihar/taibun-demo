@@ -14,6 +14,28 @@ export default function Navbar() {
   const computedColourScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
   const { i18n, t } = useTranslation();
 
+  const routes = [
+    { path: '/', label: 'navbar.transliterator' },
+    { path: '/tokeniser', label: 'navbar.tokeniser' },
+    { path: '/characters', label: 'navbar.characters' },
+    { path: '/about', label: 'navbar.about' },
+  ];
+
+  const languageOptions = [
+    { value: 'en', label: 'EN' },
+    { value: 'tw', label: '台語' },
+    { value: 'zh', label: '國語' }
+  ];
+
+  const ColourSchemeToggle = () => (
+    <ActionIcon variant='default' size='xl' radius="md" aria-label='Toggle colour scheme'
+      onClick={() => setColorScheme(computedColourScheme === 'light' ? 'dark' : 'light')}
+    >
+      <IconSun style={{ width: rem(22), height: rem(22) }} className={cx(classes.icon, classes.light)} stroke={1.5} />
+      <IconMoon style={{ width: rem(22), height: rem(22) }} className={cx(classes.icon, classes.dark)} stroke={1.5} />
+    </ActionIcon>
+  );
+
   const changeLanguage = (newLang: string) => {
     i18n.changeLanguage(newLang);
     localStorage.setItem('i18nLang', newLang);
@@ -27,87 +49,47 @@ export default function Navbar() {
   }, []);
 
   return (
-    <Box className={classes.navbar} pos="sticky" top={0} style={{ backgroundColor: `light-dark(white, #333)` }}>
+    <header className={classes.navbar} style={{ position: 'sticky', top: 0, backgroundColor: `light-dark(white, #333)` }}>
       <Box className={classes.header} style={{ height: rem(60), borderBottom: `rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))`, boxShadow: `var(--mantine-shadow-md)` }} px="lg">
         <Group justify="space-between" h="100%">
-          <Link to="/" style={{ textDecorationLine: 'none', color: 'inherit' }}>
+          <Link to="/" style={{ textDecorationLine: 'none', color: 'inherit' }} aria-label="Home">
             <Group>
-              <Image h={50} src={logo} />
+              <Image h={50} src={logo} alt="Taibun logo" />
               <Text size="xl" fw={700}>Taibun</Text>
             </Group>
           </Link>
           <Group h="100%" gap={0} visibleFrom="md">
-            <Link to="/" className={classes.link}>
-              {t('navbar.transliterator')}
-            </Link>
-            <Link to="/tokeniser" className={classes.link}>
-              {t('navbar.tokeniser')}
-            </Link>
-            <Link to="/characters" className={classes.link}>
-              {t('navbar.characters')}
-            </Link>
-            <Link to="/about" className={classes.link}>
-              {t('navbar.about')}
-            </Link>
+            {routes.map((route) => (
+              <Link to={route.path} className={classes.link} key={route.path} aria-label={t(route.label)}>
+                {t(route.label)}
+              </Link>
+            ))}
           </Group>
           <Group visibleFrom="md">
-            <ActionIcon variant='default' size='xl' radius="md" aria-label='Toggle colour scheme'
-              onClick={() => setColorScheme(computedColourScheme === 'light' ? 'dark' : 'light')}
-            >
-              <IconSun style={{ width: rem(22), height: rem(22) }} className={cx(classes.icon, classes.light)} stroke={1.5} />
-              <IconMoon style={{ width: rem(22), height: rem(22) }} className={cx(classes.icon, classes.dark)} stroke={1.5} />
-            </ActionIcon>
-
-            <SegmentedControl radius="xl" size="md" value={i18n.language} classNames={classes} onChange={changeLanguage}
-              data={[
-                { value: 'en', label: 'EN' },
-                { value: 'tw', label: '台語' },
-                { value: 'zh', label: '國語' }
-              ]}
-            />
+            <ColourSchemeToggle aria-label="Toggle color scheme" />
+            <SegmentedControl radius="xl" size="md" value={i18n.language} classNames={classes} onChange={changeLanguage} data={languageOptions} aria-label="Language switcher" />
           </Group>
-          <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="md" />
+          <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="md" aria-label="Toggle navigation menu" />
         </Group>
       </Box>
 
       <Drawer opened={drawerOpened} onClose={closeDrawer} size="100%" padding="md" title="" hiddenFrom="md" zIndex={1000000}>
         <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
           <Divider my="sm" />
-
-          <Link to="/" className={classes.link} onClick={closeDrawer}>
-            {t('navbar.transliterator')}
-          </Link>
-          <Link to="/tokeniser" className={classes.link} onClick={closeDrawer}>
-            {t('navbar.tokeniser')}
-          </Link>
-          <Link to="/characters" className={classes.link} onClick={closeDrawer}>
-            {t('navbar.characters')}
-          </Link>
-          <Link to="/about" className={classes.link} onClick={closeDrawer}>
-            {t('navbar.about')}
-          </Link>
-
+          {routes.map((route) => (
+            <Link to={route.path} className={classes.link} onClick={closeDrawer} key={route.path} aria-label={t(route.label)}>
+              {t(route.label)}
+            </Link>
+          ))}
           <Divider my="sm" />
-
           <Group justify="center" grow pb="xl" px="md">
-            <SegmentedControl radius="xl" size="md" value={i18n.language} classNames={classes} onChange={(newLang) => { changeLanguage(newLang); closeDrawer(); }}
-              data={[
-                { value: 'en', label: 'EN' },
-                { value: 'tw', label: '台語' },
-                { value: 'zh', label: '國語' }
-              ]}
-            />
+            <SegmentedControl radius="xl" size="md" value={i18n.language} classNames={classes} onChange={(newLang) => { changeLanguage(newLang); closeDrawer(); }} data={languageOptions} aria-label="Language switcher" />
           </Group>
           <Flex justify="center" align="center">
-            <ActionIcon variant='default' size='xl' radius="md" aria-label='Toggle colour scheme'
-              onClick={() => setColorScheme(computedColourScheme === 'light' ? 'dark' : 'light')}
-            >
-              <IconSun style={{ width: rem(22), height: rem(22) }} className={cx(classes.icon, classes.light)} stroke={1.5} />
-              <IconMoon style={{ width: rem(22), height: rem(22) }} className={cx(classes.icon, classes.dark)} stroke={1.5} />
-            </ActionIcon>
+            <ColourSchemeToggle aria-label="Toggle color scheme" />
           </Flex>
         </ScrollArea>
       </Drawer>
-    </Box>
+    </header>
   );
 }

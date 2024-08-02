@@ -9,18 +9,6 @@ html {
 .zhCn {
 	font-family: 'Noto Sans SC', 'Noto Sans TC', sans-serif;
 }
-::-webkit-scrollbar {
-	width: 10px;
-}
-::-webkit-scrollbar-track {
-	background: rgba(0, 0, 0, .15);
-}
-::-webkit-scrollbar-thumb {
-	background: #8F8F8F;
-}
-::-webkit-scrollbar-thumb:hover {
-	background: rgba(0, 0, 0, .60);
-}
 
 /* General */
 .wrapper {
