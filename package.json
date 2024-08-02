@@ -1,5 +1,5 @@
 {
-  "name": "vite-min-template",
+  "name": "taibun-demo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -21,7 +21,7 @@
     "react-helmet-async": "^2.0.5",
     "react-i18next": "^14.1.1",
     "react-router-dom": "^6.23.1",
-    "taibun": "^1.1.0"
+    "taibun": "1.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.65",
