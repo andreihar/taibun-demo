@@ -39,12 +39,14 @@ export default function Navbar() {
   const changeLanguage = (newLang: string) => {
     i18n.changeLanguage(newLang);
     localStorage.setItem('i18nLang', newLang);
+    document.body.setAttribute('lang', newLang === 'en' ? 'en' : 'zh-tw');
   };
 
   useEffect(() => {
     const savedLang = localStorage.getItem('i18nLang');
     if (savedLang) {
       i18n.changeLanguage(savedLang);
+      document.body.setAttribute('lang', savedLang === 'en' ? 'en' : 'zh-tw');
     }
   }, []);
 
