@@ -96,7 +96,7 @@ The website can be accessed through the URL `http://localhost:5173/`.
 Transliterator Page allows users to convert Chinese characters to the chosen transliteration system with customisable parameters such as system, dialect, tone format, delimiter, sandhi rules, and punctuation style.
 
 <p align="center">
-<img src="readme/transliterator.jpg" alt="Transliterator" height="350">
+<img src="readme/transliterator.jpg" alt="Transliterator" width="600">
 </p>
 
 ### Tokeniser
@@ -104,7 +104,7 @@ Transliterator Page allows users to convert Chinese characters to the chosen tra
 Tokeniser Page performs tokenisation of Taiwanese Hokkien sentences, breaking down the text into individual words or tokens.
 
 <p align="center">
-<img src="readme/tokeniser.jpg" alt="Tokeniser" height="350">
+<img src="readme/tokeniser.jpg" alt="Tokeniser" width="600">
 </p>
 
 ### Set Converter
@@ -112,7 +112,7 @@ Tokeniser Page performs tokenisation of Taiwanese Hokkien sentences, breaking do
 Set Converter Page converts text between Simplified and Traditional Chinese characters for Taiwanese Hokkien.
 
 <p align="center">
-<img src="readme/converter.jpg" alt="Set Converter" height="350">
+<img src="readme/converter.jpg" alt="Set Converter" width="600">
 </p>
 
 ### Localisation
@@ -120,8 +120,8 @@ Set Converter Page converts text between Simplified and Traditional Chinese char
 Users can switch between English, Taiwanese, and Mandarin from the language selector in the Navbar.
 
 <p align="center">
-<img src="readme/oan.jpg" alt="Taiwanese" height="350">
-<img src="readme/cmn.jpg" alt="Mandarin" height="350">
+<img src="readme/oan.jpg" alt="Taiwanese" width="600">
+<img src="readme/cmn.jpg" alt="Mandarin" width="600">
 </p>
 
 
@@ -130,7 +130,7 @@ Users can switch between English, Taiwanese, and Mandarin from the language sele
 ## Lighthouse Report
 
 <p align="center">
-<img src="readme/audit.jpg" alt="Audit" height="150">
+<img src="readme/audit.jpg" alt="Audit" width="500">
 </p>
 
 
