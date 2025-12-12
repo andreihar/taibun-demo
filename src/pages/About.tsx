@@ -15,13 +15,13 @@ export default function About() {
     setRerender(1);
   }, [i18n.language]);
 
-  const MOCKDATA = [
+  const DATA = [
     { icon: IconLanguageKatakana, title: t('about.feat1.title'), description: t('about.feat1.description') },
     { icon: IconBrandDouban, title: t('about.feat2.title'), description: t('about.feat2.description') },
     { icon: IconDevices2, title: t('about.feat3.title'), description: t('about.feat3.description') },
     { icon: IconReceiptOff, title: t('about.feat4.title'), description: t('about.feat4.description') }
   ];
-  const features = MOCKDATA.map((feature) => (
+  const features = DATA.map((feature) => (
     <Box key={feature.title}>
       <ThemeIcon size={44} radius="md" variant="gradient" gradient={{ deg: 133, from: 'red', to: 'orange' }}>
         <feature.icon style={{ width: rem(26), height: rem(26) }} stroke={1.5} />

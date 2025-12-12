@@ -30,7 +30,7 @@ export default function Converter() {
   return (
     <>
       <Helmet>
-        <title>{t('navbar.converter')} | Taibun</title>
+        <title>{t('navbar.characters')} | Taibun</title>
         <meta name="description" content="Convert Taiwanese Hokkien text between Simplified and Traditional Chinese characters. Enter your text, select desired characters, and get the output instantly." />
       </Helmet>
       <Box className={classes.wrapper}>
